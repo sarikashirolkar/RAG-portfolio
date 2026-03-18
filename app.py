@@ -2,7 +2,6 @@ import requests
 import streamlit as st
 
 DEFAULT_LOCAL_URL = "http://127.0.0.1:8008/chat"
-DEFAULT_CLOUD_URL = "https://sarika-portfolio-worker.sarikashirolkar.workers.dev"
 
 st.set_page_config(
     page_title="Sarika's RAG Portfolio Assistant",
@@ -14,18 +13,8 @@ st.set_page_config(
 with st.sidebar:
     st.title("⚙️ Settings")
 
-    backend = st.radio(
-        "Backend",
-        ["Local (Ollama)", "Cloudflare Worker (OpenAI)"],
-        index=0,
-    )
-
-    if backend == "Local (Ollama)":
-        api_url = st.text_input("Server URL", value=DEFAULT_LOCAL_URL)
-        st.caption("Run `python local_chat_server.py` before using this.")
-    else:
-        api_url = st.text_input("Worker URL", value=DEFAULT_CLOUD_URL)
-        st.caption("Requires a deployed Cloudflare Worker with OPENAI_API_KEY set.")
+    api_url = st.text_input("Server URL", value=DEFAULT_LOCAL_URL)
+    st.caption("Run `python local_chat_server.py` before using this.")
 
     st.divider()
     if st.button("Clear chat"):
